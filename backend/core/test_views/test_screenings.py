@@ -3,7 +3,11 @@ import pytest
 
 @pytest.mark.django_db
 def test_screenings_sold_out_status_true(
-    client, create_film, create_cinema, create_screening, create_reservation
+    client,
+    create_film,
+    create_cinema,
+    create_screening,
+    create_reservation,
 ):
     cinema = create_cinema(name="Cinema A")
     film = create_film(name="Film A", live=True)
@@ -14,12 +18,17 @@ def test_screenings_sold_out_status_true(
     assert response.status_code == 200
 
     data = response.json()
-    assert [x['sold_out'] for x in data] == [True]
-
+    assert [x["sold_out"] for x in data] == [True]
 
 
 @pytest.mark.django_db
-def test_screening_sold_out_status_false(client, create_film, create_cinema, create_screening, create_reservation):
+def test_screening_sold_out_status_false(
+    client,
+    create_film,
+    create_cinema,
+    create_screening,
+    create_reservation,
+):
     cinema = create_cinema(name="Cinema A")
     film = create_film(name="Film A", live=True)
     screening = create_screening(film=film, cinema=cinema, capacity=10)
@@ -29,4 +38,4 @@ def test_screening_sold_out_status_false(client, create_film, create_cinema, cre
     assert response.status_code == 200
 
     data = response.json()
-    assert [x['sold_out'] for x in data] == [False]
+    assert [x["sold_out"] for x in data] == [False]
