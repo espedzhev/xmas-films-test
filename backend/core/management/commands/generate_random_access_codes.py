@@ -1,11 +1,10 @@
 import csv
 import time
-import asyncio
-from concurrent.futures import ThreadPoolExecutor
 
-import shortuuid
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError, transaction
+
+import shortuuid
 
 from core.models import AccessCode
 

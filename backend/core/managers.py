@@ -1,10 +1,3 @@
-"""
-Add a ReservationManager with a custom create method.
-- This should use the provided screening and quantity kwargs to sense-check the values are acceptable, given the current state of the data in the Reservation table.
-- If there is an issue, a ValidationError should be rasied.
-- The method should make use of transaction.atomic and select_for_update to guard against race conditions
-- Tests should be added to cover this ne
-"""
 from typing import TYPE_CHECKING, Any
 
 from django.core.exceptions import ValidationError
