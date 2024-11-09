@@ -20,7 +20,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "xmas_films_test",
         "USER": "djangouser",
-        "PASSWORD": "your_password_here",
+        "PASSWORD": "",
         "HOST": "localhost",
         "PORT": "",
     }
@@ -38,7 +38,7 @@ EMAIL_FILE_PATH = BACKEND_DIR / "sent_emails"
 SHOW_DDT = os.environ.get("SHOW_DDT") == "True"
 
 if SHOW_DDT:
-    INSTALLED_APPS = INSTALLED_APPS + ["debug_toolbar", "django_extensions"]
+    INSTALLED_APPS = INSTALLED_APPS + ["debug_toolbar"]
     MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware"] + MIDDLEWARE
     INTERNAL_IPS = ["127.0.0.1"]
 
