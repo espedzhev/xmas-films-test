@@ -12,6 +12,7 @@ from django_lifecycle import AFTER_CREATE, AFTER_UPDATE, LifecycleModel, hook
 from hashids import Hashids
 
 from .managers import ReservationManager
+from .querysets import ScreeningQuerySet
 from .utils import tz_date_formatted
 
 logger = logging.getLogger(__name__)
@@ -66,6 +67,8 @@ class Film(models.Model):
 class Screening(models.Model):
     class Meta:
         ordering = ["cinema__name", "starts_at"]
+
+    objects = ScreeningQuerySet.as_manager()
 
     film = models.ForeignKey(Film, on_delete=models.CASCADE)
     slug = models.CharField(max_length=128, unique=True, db_index=True)

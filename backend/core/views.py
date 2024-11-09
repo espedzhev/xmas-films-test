@@ -30,7 +30,14 @@ class CinemaViewSet(viewsets.ReadOnlyModelViewSet):
 
 @method_decorator(cache_control(max_age=60), name="dispatch")
 class ScreeningViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Screening.objects.all().select_related("film", "cinema").filter(film__live=True)
+    # fmt: off
+    queryset = (
+        Screening.objects
+        .select_related("film", "cinema")
+        .filter(film__live=True)
+        .with_sold_out()
+    )
+    # fmt: on
     serializer_class = ScreeningSerializer
     lookup_field = "slug"
 

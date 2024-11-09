@@ -50,8 +50,8 @@ def create_reservation(create_access_code):
 
 @pytest.fixture
 def create_film():
-    def func(name="Film"):
-        return Film.objects.create(name=name)
+    def func(name="Film", live=False):
+        return Film.objects.create(name=name, live=live)
 
     return func
 

@@ -30,6 +30,8 @@ class FilmSerializer(serializers.ModelSerializer):
 
 
 class ScreeningSerializer(serializers.ModelSerializer):
+    sold_out = serializers.SerializerMethodField()
+
     class Meta:
         model = Screening
         fields = [
@@ -40,6 +42,7 @@ class ScreeningSerializer(serializers.ModelSerializer):
             "time_slug",
             "starts_at",
             "capacity",
+            "sold_out",
         ]
 
     film_slug = serializers.SerializerMethodField()
@@ -54,6 +57,9 @@ class ScreeningSerializer(serializers.ModelSerializer):
 
     def get_time_slug(self, obj):
         return obj.starts_at.strftime("%Y-%m-%d-%H-%M")
+
+    def get_sold_out(self, obj):
+        return getattr(obj, "sold_out", False)
 
 
 class ReservationSerializer(serializers.ModelSerializer):
