@@ -11,6 +11,7 @@ import qrcode
 from django_lifecycle import AFTER_CREATE, AFTER_UPDATE, LifecycleModel, hook
 from hashids import Hashids
 
+from .managers import ReservationManager
 from .utils import tz_date_formatted
 
 logger = logging.getLogger(__name__)
@@ -97,6 +98,8 @@ class AccessCode(models.Model):
 class Reservation(LifecycleModel):
     class Meta:
         ordering = ["-created_at"]
+
+    objects = ReservationManager()
 
     created_at = models.DateTimeField(auto_now_add=True)
     reservation_id = models.CharField(max_length=16, blank=True)
